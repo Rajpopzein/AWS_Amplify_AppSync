@@ -1,4 +1,32 @@
 const { graphql, GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLSchema } = require("graphql");
+var _= require("lodash");
+
+//dummy data
+var userdata = [
+    {id:"1", name:"boomer_head",age:24, profession:"AWS Developer"},
+    {id:"2", name:"boomer_cheef", age:24, profession:"Software Tester"},
+    {id:"3", name:"boomer", age:22, profession:"Full Stack Developer"},
+    {id:"4", name:"boomer2", age:20, profession:"Cloud Engineer"}
+
+]
+
+//dummy data 2
+var hobbydata = [
+    {id:"1",title:'programming',description:"writting this that can be done by the computer"},
+    {id:"2",title:'Bike-Rider',description:"writting this that can be done by the computer"},
+    {id:"3",title:'Reading books',description:"writting this that can be done by the computer"},
+    {id:"4",title:'Hearing Audiobook',description:"writting this that can be done by the computer"}
+]
+
+// dummy data 3
+var postdata = [
+    { id:"1", command:"Nice"},
+    { id:"2", command:"Best"},
+    { id:"3", command:"Wow"},
+    { id:"4", command:"Great"}
+
+]
+
 
 
 
@@ -8,21 +36,34 @@ const userType = new GraphQLObjectType(
         name: 'User',
         description:'Documentation for user....',
         fields:()=>({
-            id:{type:GraphQLString},
+            id:{type:GraphQLID},
             name:{type:GraphQLString},
             age:{type:GraphQLInt},
-            departmentID:{type:GraphQLString}
+            profession:{type:GraphQLString}
         })
     }
 )
 
-const depatmentType = new GraphQLObjectType(
+const HobbyType = new GraphQLObjectType(
     {
-        name: 'department',
-        description : 'Documentation for department',
+        name: 'Hobby',
+        description : 'Hobby discription',
         fields:()=>({
-            departmentName:{type:GraphQLString},
-            departmentID:{type:GraphQLString}
+            id:{type:GraphQLID},
+            title:{type:GraphQLString},
+            description:{type:GraphQLString}
+            
+        })
+    }
+)
+
+const postType = new GraphQLObjectType(
+    {
+        name :"post",
+        description:"Post Discription",
+        fields:()=>({
+            id:{type:GraphQLID},
+            command:{type:GraphQLString}
         })
     }
 )
@@ -33,7 +74,7 @@ const rootquery = new GraphQLObjectType({
     description:'Description',
     fields:{
         user: {
-            type:userType,depatmentType,
+            type:userType,HobbyType,
             //Argument need to getting data 
             args:{
                 id:{type:GraphQLString}
@@ -41,22 +82,37 @@ const rootquery = new GraphQLObjectType({
 
             resolve(parent,args)
             {
-                let department = {
-                    departmentID:"123456",
-                    departmentName:"InformationTechnology"
-                }
-
-                let user ={
-                    name:"rajkumar.r",
-                    age: 24,
-                    id : "1234",
-                    departmentID: department.departmentID
-                }
-
-                return user 
+                
+                return _.find(userdata,{id:args.id}) 
                 //where we get data from api or frontend
                 //we resolve with data
                 //get and return data from data source
+            }
+        },
+
+        hobby:{
+            type:HobbyType,
+            args:{
+                id:{type:GraphQLID}
+            },
+
+            resolve(parent,args)
+            {
+                return _.find(hobbydata,{id:args.id})
+                //returning hobby
+            }
+        },
+
+        post:{
+            type:postType,
+            args:{
+                id:{type:GraphQLID}
+            },
+
+            resolve(parent,args)
+            {
+                return _.find(postdata,{id:args.id})
+                //return post datas
             }
         }
     }
