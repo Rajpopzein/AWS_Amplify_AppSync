@@ -17,7 +17,7 @@ const userType = new GraphQLObjectType(
 
 //rootquery
 const rootquery = new GraphQLObjectType({
-    name:'RootQueryDocumentation',
+    name:'RootQuery',
     description:'Description',
     fields:{
         user: {
@@ -28,6 +28,13 @@ const rootquery = new GraphQLObjectType({
             
             resolve(parent,args)
             {
+                let user ={
+                    name:"rajkumar.r",
+                    age: 24,
+                    id : "1234"
+                }
+
+                return user
                 //where we get data from api or frontend
                 //we resolve with data
                 //get and return data from data source
