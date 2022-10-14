@@ -20,14 +20,12 @@ var hobbydata = [
 
 // dummy data 3
 var postdata = [
-    { id:"1", command:"Nice"},
-    { id:"2", command:"Best"},
-    { id:"3", command:"Wow"},
-    { id:"4", command:"Great"}
+    { id:"1", command:"Nice",userId:"1"},
+    { id:"2", command:"Best",userId:"2"},
+    { id:"3", command:"Wow",userId:"4"},
+    { id:"4", command:"Great",userId:"2"}
 
 ]
-
-
 
 
 //create type
