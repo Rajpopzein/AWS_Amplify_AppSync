@@ -12,10 +12,10 @@ var userdata = [
 
 //dummy data 2
 var hobbydata = [
-    {id:"1",title:'programming',description:"writting this that can be done by the computer",userId:"1"},
-    {id:"2",title:'Bike-Rider',description:"writting this that can be done by the computer",userId:"2"},
-    {id:"3",title:'Reading books',description:"writting this that can be done by the computer",userId:"4"},
-    {id:"4",title:'Hearing Audiobook',description:"writting this that can be done by the computer",userId:"2"}
+    {id:"1",title:'programming',description:"writting this that can be done by the computer"},
+    {id:"2",title:'Bike-Rider',description:"writting this that can be done by the computer"},
+    {id:"3",title:'Reading books',description:"writting this that can be done by the computer"},
+    {id:"4",title:'Hearing Audiobook',description:"writting this that can be done by the computer"}
 ]
 
 // dummy data 3
@@ -58,13 +58,7 @@ const HobbyType = new GraphQLObjectType(
         fields:()=>({
             id:{type:GraphQLID},
             title:{type:GraphQLString},
-            description:{type:GraphQLString},
-            user:{
-                type:userType,
-                resolve(parent,args){
-                    return _.find(userdata,{id:parent.userId})
-                }
-            }
+            description:{type:GraphQLString}
             
         })
     }
@@ -77,7 +71,6 @@ const postType = new GraphQLObjectType(
         fields:()=>({
             id:{type:GraphQLID},
             command:{type:GraphQLString},
-            //Will get user data
             users:{
                 type:userType,
                 resolve(parent,args)
