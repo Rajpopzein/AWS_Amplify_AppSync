@@ -68,6 +68,7 @@ const postType = new GraphQLObjectType(
     }
 )
 
+
 //rootquery
 const rootquery = new GraphQLObjectType({
     name:'RootQuery',
@@ -117,6 +118,7 @@ const rootquery = new GraphQLObjectType({
         }
     }
 })
+
 
 //exporting GraphQlSchema with root query
 module.exports = new GraphQLSchema({
