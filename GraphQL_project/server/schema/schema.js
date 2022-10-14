@@ -20,14 +20,12 @@ var hobbydata = [
 
 // dummy data 3
 var postdata = [
-    { id:"1", command:"Nice"},
-    { id:"2", command:"Best"},
-    { id:"3", command:"Wow"},
-    { id:"4", command:"Great"}
+    { id:"1", command:"Nice", userId:"1"},
+    { id:"2", command:"Best", userId:"2"},
+    { id:"3", command:"Wow", userId:"4"},
+    { id:"4", command:"Great", userId:"2"}
 
 ]
-
-
 
 
 //create type
@@ -39,7 +37,16 @@ const userType = new GraphQLObjectType(
             id:{type:GraphQLID},
             name:{type:GraphQLString},
             age:{type:GraphQLInt},
-            profession:{type:GraphQLString}
+            profession:{type:GraphQLString},
+            // posts:[{
+            //     post :{
+            //         type:postType,
+            //         resolve(parent,args)
+            //         {
+            //             return _.find(postdata,{userId:parent.id})
+            //         }
+            //     }
+            // }]
         })
     }
 )
@@ -63,7 +70,14 @@ const postType = new GraphQLObjectType(
         description:"Post Discription",
         fields:()=>({
             id:{type:GraphQLID},
-            command:{type:GraphQLString}
+            command:{type:GraphQLString},
+            users:{
+                type:userType,
+                resolve(parent,args)
+                {
+                    return _.find(userdata,{id:parent.userId})
+                }
+            }
         })
     }
 )
