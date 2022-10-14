@@ -13,5 +13,5 @@ app.use('/graphql', graphglHTTP.graphqlHTTP({
 
 app.listen(4000, () =>{
     //localhost:4000
-    console.log('listening for request on my awsome port 4000')
+    console.log('listening for request on port 4000')
 })
